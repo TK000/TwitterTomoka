@@ -28,6 +28,7 @@ public class ComposeActivity extends AppCompatActivity {
         tvNewTweet = (TextView) findViewById(R.id.tvNewTweet);
     }
 
+    public final int REQUEST_CODE = 20;
 
     public void networkRequest(View v) {
         client = TwitterApp.getRestClient(getApplicationContext());
@@ -42,10 +43,9 @@ public class ComposeActivity extends AppCompatActivity {
                 }
                 // ActivityOne.java
                 // REQUEST_CODE can be any value we like, used to determine the result type later
-                final int REQUEST_CODE = 20;
                 // FirstActivity, launching an activity for a result
                 Intent i = new Intent(ComposeActivity.this, TimelineActivity.class);
-                i.putExtra("mode", 2); // pass arbitrary data to launched activity
+                //i.putExtra("mode", 2); // pass arbitrary data to launched activity
                 startActivityForResult(i, REQUEST_CODE);
                 //setResult(RESULT_OK); // set result code and bundle data for response
                 //finish(); // closes the activity, pass data to parent
