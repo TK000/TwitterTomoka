@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:maxLength="140"
         android:inputType="textPersonName" />
 
     <Button
@@ -20,5 +21,11 @@
         android:layout_height="wrap_content"
         android:onClick="networkRequest"
         android:text="Submit" />
+
+    <TextView
+        android:id="@+id/charCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 </LinearLayout>

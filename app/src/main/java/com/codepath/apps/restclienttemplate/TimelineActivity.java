@@ -15,6 +15,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -47,9 +48,27 @@ public class TimelineActivity extends AppCompatActivity {
         }
     }
 
+    private final int REQUEST_CODE = 20;
+
     public void composeMessage() {
         Intent intent = new Intent(this, ComposeActivity.class);
-        this.startActivityForResult(intent, 1);
+        //intent.putExtra("name", Parcels.wrap(user));
+        this.startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // REQUEST_CODE is defined above
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            // Extract name value from result extras
+            Tweet tweet = Parcels.unwrap(data.getParcelableExtra("name"));
+            int code = data.getExtras().getInt("code", 0);
+            // Toast the name to display temporarily on screen
+            //Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
+            tweets.add(0, tweet);
+            tweetAdapter.notifyItemInserted(0);
+            rvTweets.scrollToPosition(0);
+        }
     }
 
 
