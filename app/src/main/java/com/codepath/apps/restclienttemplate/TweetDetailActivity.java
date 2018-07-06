@@ -26,6 +26,7 @@ public class TweetDetailActivity extends AppCompatActivity {
     TextView tvdCreatedAt;
     ImageView ivdProfile;
     ImageView ivMedia;
+    public int fav = 0;
 
     private TwitterClient client;
 
@@ -75,5 +76,57 @@ public class TweetDetailActivity extends AppCompatActivity {
                 Log.e("retweet", "retweet failed");
             }
         });
+    }
+
+    public void onFav(View v) {
+        client = TwitterApp.getRestClient(getApplicationContext());
+        if (fav == 0) {
+            client.favTweet(tweet.uid, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    //super.onSuccess(statusCode, headers, response);
+                    try {
+                        fav = 1;
+                        Tweet tweet1 = Tweet.fromJSON(response);
+                        TimelineActivity.tweets.add(0, tweet1);
+                        TimelineActivity.tweetAdapter.notifyItemInserted(0);
+                        //Intent i = new Intent(TweetDetailActivity.this, TimelineActivity.class);
+                        //startActivity(i);
+                        finish();
+                    } catch (JSONException e) {
+                        Log.e("favtweet", "favtweet failed");
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    Log.e("favtweet", "favtweet failed");
+                }
+            });
+        }
+        else {
+            client.unfavTweet(tweet.uid, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    //super.onSuccess(statusCode, headers, response);
+                    try {
+                        fav = 0;
+                        Tweet tweet1 = Tweet.fromJSON(response);
+                        TimelineActivity.tweets.add(0, tweet1);
+                        TimelineActivity.tweetAdapter.notifyItemInserted(0);
+                        //Intent i = new Intent(TweetDetailActivity.this, TimelineActivity.class);
+                        //startActivity(i);
+                        finish();
+                    } catch (JSONException e) {
+                        Log.e("favtweet", "favtweet failed");
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    Log.e("favtweet", "favtweet failed");
+                }
+            });
+        }
     }
 }

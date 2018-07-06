@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -64,6 +65,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvBody;
         public TextView tvTimestamp;
         public ImageView tvImage;
+        public RelativeLayout rLayout;
+        public ImageView ivReply;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -74,9 +77,11 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvTimestamp = (TextView) itemView.findViewById(R.id.tvTimestamp);
             tvImage = (ImageView) itemView.findViewById(R.id.tvImage);
+            rLayout = (RelativeLayout) itemView.findViewById(R.id.rLayout);
+            ivReply = (ImageView) itemView.findViewById(R.id.ivReply);
 
-            itemView.setOnClickListener(this);
-            tvImage.setOnClickListener(this);
+            rLayout.setOnClickListener(this);
+            ivReply.setOnClickListener(this);
         }
 
 
@@ -90,13 +95,14 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                 // get the movie at the position, this won't work if the class is static
                 Tweet tweet = mTweets.get(position);
                 // create intent for the new activity
-                if (v.getId() == R.id.tvImage) {
+                if (v == ivReply) {
                     Intent intent = new Intent(context, ReplyActivity.class);
                     // serialize the movie using parceler, use its short name as a key
                     intent.putExtra("tweet", Parcels.wrap(tweet));
                     //intent.putExtra(placeholder, config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
                     // show the activity
                     context.startActivity(intent);
+                    //Log.i("onclick", "tvImage clicked");
                 }
                 else {
                     Intent intent = new Intent(context, TweetDetailActivity.class);
