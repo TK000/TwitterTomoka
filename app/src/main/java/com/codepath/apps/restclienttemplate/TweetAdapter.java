@@ -18,7 +18,7 @@ import java.util.List;
 
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> {
 
-    private List<Tweet> mTweets;
+    public List<Tweet> mTweets;
     Context context;
     // pass in the Tweets array in the constructor
     public TweetAdapter(List<Tweet> tweets) {
@@ -76,7 +76,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvImage = (ImageView) itemView.findViewById(R.id.tvImage);
 
             itemView.setOnClickListener(this);
+            tvImage.setOnClickListener(this);
         }
+
 
         // when the user clicks on a row, show MovieDetailsActivity for the selected movie
         @Override
@@ -88,16 +90,27 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                 // get the movie at the position, this won't work if the class is static
                 Tweet tweet = mTweets.get(position);
                 // create intent for the new activity
-                Intent intent = new Intent(context, TweetDetailActivity.class);
-                // serialize the movie using parceler, use its short name as a key
-                intent.putExtra("tweet", Parcels.wrap(tweet));
-                //intent.putExtra(placeholder, config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
-                // show the activity
-                context.startActivity(intent);
+                if (v.getId() == R.id.tvImage) {
+                    Intent intent = new Intent(context, ReplyActivity.class);
+                    // serialize the movie using parceler, use its short name as a key
+                    intent.putExtra("tweet", Parcels.wrap(tweet));
+                    //intent.putExtra(placeholder, config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
+                    // show the activity
+                    context.startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(context, TweetDetailActivity.class);
+                    // serialize the movie using parceler, use its short name as a key
+                    intent.putExtra("tweet", Parcels.wrap(tweet));
+                    //intent.putExtra(placeholder, config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
+                    // show the activity
+                    context.startActivity(intent);
+                }
             }
 
         }
     }
+
 
     // Clean all elements of the recycler
     public void clear() {

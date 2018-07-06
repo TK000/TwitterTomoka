@@ -1,6 +1,5 @@
 package com.codepath.apps.restclienttemplate;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 
@@ -57,14 +57,22 @@ public class TweetDetailActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //super.onSuccess(statusCode, headers, response);
-                //Tweet tweet = Tweet.fromJSON(response);
-                Intent i = new Intent(TweetDetailActivity.this, TimelineActivity.class);
-                startActivity(i);
+                try {
+                    Tweet tweet1 = Tweet.fromJSON(response);
+                    TimelineActivity.tweets.add(0, tweet1);
+                    TimelineActivity.tweetAdapter.notifyItemInserted(0);
+                    TimelineActivity.rvTweets.scrollToPosition(0);
+                    //Intent i = new Intent(TweetDetailActivity.this, TimelineActivity.class);
+                    //startActivity(i);
+                    finish();
+                } catch (JSONException e) {
+                    Log.e("retweet", "retweet failed");
+                }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e("sendTweet", "sendtweet failed");
+                Log.e("retweet", "retweet failed");
             }
         });
     }

@@ -29,9 +29,9 @@ public class TimelineActivity extends AppCompatActivity {
 
 
     private TwitterClient client;
-    TweetAdapter tweetAdapter;
-    ArrayList<Tweet> tweets;
-    RecyclerView rvTweets;
+    public static TweetAdapter tweetAdapter;
+    public static ArrayList<Tweet> tweets;
+    public static RecyclerView rvTweets;
 
     // Instance of the progress action-view
     MenuItem miActionProgressItem;
@@ -77,12 +77,14 @@ public class TimelineActivity extends AppCompatActivity {
     }
 
     private final int REQUEST_CODE = 20;
+    //private final int REPLY_REQUEST_CODE = 30;
 
     public void composeMessage() {
         Intent intent = new Intent(this, ComposeActivity.class);
         //intent.putExtra("name", Parcels.wrap(user));
         this.startActivityForResult(intent, REQUEST_CODE);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

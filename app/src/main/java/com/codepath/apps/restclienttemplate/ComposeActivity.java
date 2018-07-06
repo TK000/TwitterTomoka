@@ -51,7 +51,7 @@ public class ComposeActivity extends AppCompatActivity {
 
     public void networkRequest(View v) {
         client = TwitterApp.getRestClient(getApplicationContext());
-        client.sendTweet(tvNewTweet.getText().toString(), new JsonHttpResponseHandler() {
+        client.sendTweet(tvNewTweet.getText().toString(), 0, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //super.onSuccess(statusCode, headers, response);
