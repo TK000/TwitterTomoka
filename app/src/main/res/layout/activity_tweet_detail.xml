@@ -8,26 +8,31 @@
 
     <TextView
         android:id="@+id/tvdUser"
-        android:layout_width="match_parent"
+        android:layout_width="331dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="53dp"
         android:text="TextView"
         tools:layout_editor_absoluteX="3dp"
         tools:layout_editor_absoluteY="4dp" />
 
     <TextView
         android:id="@+id/tvdBody"
-        android:layout_width="match_parent"
+        android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvdUser"
+        android:layout_marginStart="53dp"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/tvdCreatedAt"
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvdBody"
+        android:layout_marginStart="54dp"
         android:text="TextView" />
 
     <ImageView
@@ -35,7 +40,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvdCreatedAt"
+        android:layout_alignParentTop="true"
         app:srcCompat="@android:color/black" />
 
     <Button

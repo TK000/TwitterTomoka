@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context=".ReplyActivity">
 
+    <TextView
+        android:id="@+id/rUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
     <EditText
         android:id="@+id/tvrNewTweet"
         android:layout_width="match_parent"
@@ -15,23 +21,17 @@
         android:maxLength="140"
         android:inputType="textPersonName" />
 
+    <TextView
+        android:id="@+id/charrCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0/140" />
+
     <Button
         android:id="@+id/btnrSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="ReplyRequest"
         android:text="Submit" />
-
-    <TextView
-        android:id="@+id/charrCount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/rUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
 
 </LinearLayout>
