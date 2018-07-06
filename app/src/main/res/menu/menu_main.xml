@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".TimelineActivity"
     android:background="@color/twitter_blue">
     <item
+        android:id="@+id/miActionProgress"
+        android:orderInCategory="103"
+        android:title="Loading..."
+        android:visible="true"
+        app:actionLayout="@layout/action_view_progress"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/imTweet"
         android:icon="@drawable/ic_launcher"
+        android:orderInCategory="104"
         android:title="Profile"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="always" />
 
-    <item
-        android:id="@+id/miActionProgress"
-        android:title="Loading..."
-        android:visible="false"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        app:actionLayout="@layout/action_view_progress" />
 </menu>

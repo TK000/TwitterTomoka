@@ -33,6 +33,8 @@ public class TimelineActivity extends AppCompatActivity {
     public static ArrayList<Tweet> tweets;
     public static RecyclerView rvTweets;
 
+    public static long max_id;
+
     // Instance of the progress action-view
     MenuItem miActionProgressItem;
 
@@ -147,17 +149,26 @@ public class TimelineActivity extends AppCompatActivity {
                 //Log.d("TwitterClient", response.toString());
                 // iterate through the JSON array
                 // for each entry, deserialize the JSON object
+                showProgressBar();
                 for (int i = 0; i < response.length(); i++) {
                     // convert each object to a Tweet model
                     // add that Tweet model to our data source
                     // notify the adapter that we've added an item
                     try {
                         Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
+                        if (i == 0) {
+                            max_id = tweet.uid;
+                        } else {
+                            if (tweet.uid < max_id) {
+                                max_id = tweet.uid;
+                            }
+                        }
                         tweets.add(tweet);
                         tweetAdapter.notifyItemInserted(tweets.size() - 1);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    hideProgressBar();
                 }
             }
 
